@@ -1,4 +1,4 @@
-name: Checkout Demo
+name: Secrets Demo
 
 on:
   push:
@@ -6,13 +6,13 @@ on:
       - main
 
 jobs:
-  demo-job:
+  secret-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: List repository files
+      - name: Use secret safely
         run: |
-          ls -l
+          echo "Secret is available"
+          echo "Length of secret: ${#MY_SECRET}"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
